@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/koraypoyraz/PycharmProjects/mlflow-projects/linearml/mlruns/0/c278664b94714151ba488668e39e75b1/artifacts
+end_time: 1675334932399
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c278664b94714151ba488668e39e75b1
+run_name: upbeat-squirrel-400
+run_uuid: c278664b94714151ba488668e39e75b1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1675334930784
+status: 3
+tags: []
+user_id: koraypoyraz
