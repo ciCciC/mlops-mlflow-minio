@@ -36,18 +36,16 @@ if __name__ == "__main__":
     alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
     l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
 
-    experiment_name = 'modelling_wines'
-    experiment = mlflow.get_experiment_by_name(experiment_name)
-    experiment_id = None
+    # experiment_name = 'modelling_wines'
+    # experiment = mlflow.get_experiment_by_name(experiment_name)
+    # experiment_id = None
+    #
+    # if experiment:
+    #     experiment_id = experiment.experiment_id
+    # else:
+    #     experiment_id = mlflow.create_experiment(experiment_name)
 
-    if experiment:
-        experiment_id = experiment.experiment_id
-    else:
-        experiment_id = mlflow.create_experiment(experiment_name)
-
-    with mlflow.start_run(
-            experiment_id=experiment_id,
-    ):
+    with mlflow.start_run():
         lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
         lr.fit(train_x, train_y)
 
