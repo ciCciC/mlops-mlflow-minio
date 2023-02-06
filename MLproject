@@ -1,6 +1,6 @@
 name: mlflow-linearml
 
-conda_env: conda_env.yaml
+conda_env: conda.yaml
 
 entry_points:
   main:

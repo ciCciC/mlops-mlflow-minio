@@ -1,4 +1,4 @@
-name: mllinear
+name: mlflow-linearml
 channels:
   - defaults
 dependencies:
