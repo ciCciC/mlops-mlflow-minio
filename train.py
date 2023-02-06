@@ -36,7 +36,11 @@ if __name__ == "__main__":
     alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
     l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
 
-    with mlflow.start_run():
+    experiment_id = mlflow.create_experiment("modelling_wines")
+
+    with mlflow.start_run(
+            experiment_id=experiment_id,
+    ):
         lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
         lr.fit(train_x, train_y)
 
@@ -55,10 +59,10 @@ if __name__ == "__main__":
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
-        mlflow.sklearn.log_model(sk_model=lr, artifact_path="model", registered_model_name="ElasticnetWineModel")
+        # mlflow.sklearn.log_model(sk_model=lr, artifact_path="model", registered_model_name="ElasticnetWineModel")
 
-        # tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-        # if tracking_url_type_store != "file":
-        #     mlflow.sklearn.log_model(sk_model=lr, artifact_path="model", registered_model_name="ElasticnetWineModel")
-        # else:
-        #     mlflow.sklearn.log_model(sk_model=lr, artifact_path="model")
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        if tracking_url_type_store != "file":
+            mlflow.sklearn.log_model(sk_model=lr, artifact_path="model", registered_model_name="ElasticnetWineModel")
+        else:
+            mlflow.sklearn.log_model(sk_model=lr, artifact_path="model")
