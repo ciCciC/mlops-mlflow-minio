@@ -1,12 +1,12 @@
 name: mlflow-linearml
 
-python_env: python_env.yaml
+#python_env: python_env.yaml
 # or
-# conda_env: conda_env.yaml
+conda_env: conda_env.yaml
 
 entry_points:
   main:
     parameters:
       alpha: {type: float, default: 0.5}
       l1_ratio: {type: float, default: 0.1}
-    command: "python ./train.py {alpha} {l1_ratio}"
+    command: "python train.py {alpha} {l1_ratio}"
