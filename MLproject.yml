@@ -1,6 +1,6 @@
 name: mlflow-linearml
 
-python_env: files/config/python_env.yaml
+python_env: python_env.yaml
 # or
 # conda_env: conda_env.yaml
 
