@@ -4,6 +4,7 @@ import sys
 
 import pandas as pd
 import numpy as np
+from urllib.parse import urlparse
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
@@ -54,4 +55,11 @@ if __name__ == "__main__":
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
-        mlflow.sklearn.log_model(lr, "model")
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+
+        print(f'Tracking URL: {tracking_url_type_store}')
+
+        if tracking_url_type_store != "file":
+            mlflow.sklearn.log_model(lr, "model", registered_model_name="ElasticnetWineModel")
+        else:
+            mlflow.sklearn.log_model(lr, "model")
