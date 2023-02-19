@@ -4,7 +4,6 @@ import sys
 
 import pandas as pd
 import numpy as np
-from urllib.parse import urlparse
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
@@ -27,7 +26,6 @@ if __name__ == "__main__":
 
     train, test = train_test_split(data, test_size=0.25, random_state=42)
 
-    # The predicted column is "quality" which is a scalar from [3, 9]
     train_x = train.drop("quality", axis=1)
     test_x = test.drop("quality", axis=1)
     train_y = train["quality"]
@@ -36,16 +34,12 @@ if __name__ == "__main__":
     alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
     l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
 
-    # experiment_name = 'modelling_wines'
-    # experiment = mlflow.get_experiment_by_name(experiment_name)
-    # experiment_id = None
-    #
-    # if experiment:
-    #     experiment_id = experiment.experiment_id
-    # else:
-    #     experiment_id = mlflow.create_experiment(experiment_name)
+    experiment_name = 'modelling_wines'
+    # experiment_name = 'Default'
+    experiment = mlflow.get_experiment_by_name(experiment_name)
+    experiment_id = experiment.experiment_id if experiment else mlflow.create_experiment(experiment_name)
 
-    with mlflow.start_run():
+    with mlflow.start_run(experiment_id=experiment_id):
         lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
         lr.fit(train_x, train_y)
 
@@ -64,4 +58,4 @@ if __name__ == "__main__":
         mlflow.log_metric("r2", r2)
         mlflow.log_metric("mae", mae)
 
-        mlflow.sklearn.log_model(lr, "model")
+        mlflow.sklearn.log_model(lr, "model", registered_model_name='model_ln_wines')

@@ -1,0 +1,6 @@
+artifact_location: file:///~/mlflow-linearml/mlruns/334361956051447984
+creation_time: 1676293332560
+experiment_id: '334361956051447984'
+last_update_time: 1676293332560
+lifecycle_stage: active
+name: modelling_wines

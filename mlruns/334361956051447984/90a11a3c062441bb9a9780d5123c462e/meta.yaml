@@ -1,0 +1,15 @@
+artifact_uri: file:///~/mlflow-linearml/mlruns/334361956051447984/90a11a3c062441bb9a9780d5123c462e/artifacts
+end_time: 1676293380334
+entry_point_name: ''
+experiment_id: '334361956051447984'
+lifecycle_stage: active
+run_id: 90a11a3c062441bb9a9780d5123c462e
+run_name: charming-dolphin-564
+run_uuid: 90a11a3c062441bb9a9780d5123c462e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1676293378816
+status: 3
+tags: []
+user_id: koraypoyraz
