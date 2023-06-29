@@ -1,0 +1,8 @@
+jupyter
+matplotlib
+numpy
+pandas
+mlflow
+boto3
+minio
+python-dotenv
