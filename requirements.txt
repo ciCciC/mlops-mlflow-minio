@@ -3,6 +3,11 @@ matplotlib
 numpy
 pandas
 mlflow
+mlserver
+mlserver-mlflow
 boto3
 minio
 python-dotenv
+fastapi
+uvicorn
+requests

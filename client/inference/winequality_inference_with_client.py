@@ -52,6 +52,7 @@ if __name__ == "__main__":
     artifact_uri = f'{base_artifact_uri}/{data_dir}/{file_name}'
 
     # Example Data Set fetched from S3 artifacts
+    print(f'artifact_uri: {artifact_uri}')
     file_path = mlflow.artifacts.download_artifacts(
         artifact_uri=artifact_uri,
         dst_path=Path(__file__).parent.__str__()
@@ -66,7 +67,9 @@ if __name__ == "__main__":
     test_y = [sample["quality"].iloc[0]]
 
     # Loading pre-trained model from model registry
+    print(f'Loaded model: {pre_trained_model.source}')
     loaded_model = load_model(pre_trained_model.source)
+    print(type(loaded_model))
 
     # Predict
     y_hat = loaded_model.predict(test_x)

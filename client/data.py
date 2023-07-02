@@ -17,7 +17,7 @@ def load_wine_data_example() -> pd.DataFrame:
 
 def load_data_from_uri(data_uri: str, sep: str | None) -> pd.DataFrame:
     """
-    data_uri = "https://raw.githubusercontent.com/mlflow/mlflow/master/tests/datasets/winequality-red.csv"
+    data_uri = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
     example_data = load_data_from_uri(data_uri, sep=";")
 
     :param data_uri: URI of the example_data
