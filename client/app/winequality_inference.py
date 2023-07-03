@@ -9,8 +9,8 @@ inference_request = {
 }
 
 if __name__ == '__main__':
-    # We assume 'WineQualityModel.py' is up and running before inference
-    model_endpoint = "http://127.0.0.1:5000/invocations"
+    # We assume 'WineQualityModel.py' or Containerized version is up and running before inference
+    model_endpoint = "http://127.0.0.1:5001/invocations"
 
     # Request for inference
     response = requests.post(
@@ -18,4 +18,5 @@ if __name__ == '__main__':
         json=inference_request,
         headers={"Content-Type": "application/json; charset=utf-8"})
 
-    print(response.json())
+    print(response.json() if response.status_code == 200 else response.text)
+

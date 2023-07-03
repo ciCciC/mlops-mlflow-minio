@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  inference-winequality:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: winequalitymodelimage
+    container_name: inference-winequality
+    ports:
+      - ${PORT}:${PORT}
+    expose:
+      - ${PORT}
+    networks:
+      - network1
+      - network2
+    command: >
+      python WineQualityModel.py
+      --AWS_ACCESS_KEY_ID ${AWS_ACCESS_KEY_ID}
+      --AWS_SECRET_ACCESS_KEY ${AWS_SECRET_ACCESS_KEY}
+      --MLFLOW_S3_ENDPOINT_URL ${MLFLOW_S3_ENDPOINT_URL}
+      --MODEL_URI ${MODEL_URI}
+      --HOST ${HOST}
+      --PORT ${PORT}
+
+networks:
+  network1:
+    name: mlops_docker_frontend
+    external: true
+  network2:
+    name: mlops_docker_backend
+    external: true
