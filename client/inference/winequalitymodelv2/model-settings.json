@@ -1,0 +1,7 @@
+{
+  "name": "wine-classifier-v2",
+  "implementation": "mlserver_mlflow.MLflowRuntime",
+  "parameters": {
+    "uri": ""
+  }
+}

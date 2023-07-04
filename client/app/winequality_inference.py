@@ -2,10 +2,12 @@ import requests
 
 # Sample for inference
 inference_request = {
-    "columns": ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',
-                'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density',
-                'pH', 'sulphates', 'alcohol'],
-    "data": [[7.4, 0.7, 0, 1.9, 0.076, 11, 34, 0.9978, 3.51, 0.56, 9.4]]
+    "dataframe_split": {
+        "columns": ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',
+                    'chlorides', 'free sulfur dioxide', 'total sulfur dioxide', 'density',
+                    'pH', 'sulphates', 'alcohol'],
+        "data": [[7.4, 0.7, 0, 1.9, 0.076, 11, 34, 0.9978, 3.51, 0.56, 9.4]]
+    }
 }
 
 if __name__ == '__main__':
@@ -19,4 +21,3 @@ if __name__ == '__main__':
         headers={"Content-Type": "application/json; charset=utf-8"})
 
     print(response.json() if response.status_code == 200 else response.text)
-
