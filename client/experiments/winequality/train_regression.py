@@ -1,33 +1,14 @@
 import warnings
 
 import numpy as np
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNetCV
 import mlflow.sklearn
 from client.config import Config
-from client.utils import init_env_variables
+from client.utils import init_env_variables, get_experiment_id, eval_reg_metrics
 from client.data import load_wine_data_example, path_wine_data_example
 from urllib.parse import urlparse
 from mlflow.models.signature import infer_signature
-
-
-def eval_metrics(actual, pred):
-    rmse = np.sqrt(mean_squared_error(actual, pred))
-    mae = mean_absolute_error(actual, pred)
-    r2 = r2_score(actual, pred)
-    return rmse, mae, r2
-
-
-def get_experiment_id(experiment_name: str, bucket_uri: str):
-    q_result = mlflow.search_experiments(filter_string=f"name = '{experiment_name}'")
-
-    if len(q_result) < 1:
-        exp_id = mlflow.create_experiment(experiment_name, bucket_uri)
-        return exp_id
-    else:
-        return q_result.pop().experiment_id
-
 
 if __name__ == '__main__':
     warnings.filterwarnings("ignore")
@@ -75,7 +56,7 @@ if __name__ == '__main__':
         # Compute prediction
         y_pred = lr.predict(test_x)
         # Eval predictions
-        (rmse, mae, r2) = eval_metrics(test_y, y_pred)
+        (rmse, mae, r2) = eval_reg_metrics(test_y, y_pred)
 
         # Define metrics
         metrics = {
